@@ -6,12 +6,16 @@ export const Button = ({
   icon,
   height,
   width,
+  radius,
+  onClick,
 }: {
   text: string;
   hasGradient?: boolean;
   icon?: JSX.Element;
   height?: string;
   width?: string;
+  radius?: string;
+  onClick?: () => void;
 }) => {
   const gradient = hasGradient
     ? "bg-gradient-to-r  from-[#E64A9F] to-[#915AF0]"
@@ -21,9 +25,12 @@ export const Button = ({
 
   const w = width ? `${width}` : "w-[160px]";
 
+  const r = radius || "rounded-[7px]";
+
   return (
     <button
-      className={`${h} ${w} ${gradient} rounded-[7px] flex items-center justify-center`}
+      onClick={onClick}
+      className={`${h} ${w} ${gradient} ${r} flex items-center justify-center hover:brightness-[130%]`}
     >
       {icon}
       <p className=" text-sm font-bold ml-[6px]">{text}</p>

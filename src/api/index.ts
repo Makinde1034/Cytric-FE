@@ -2,7 +2,7 @@ import { setStorageValue, getStorageValue } from "@/helpers";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const BASE_URL = "http://172.20.10.9:4191/api/v1";
+export const BASE_URL = "https://cytric-be.onrender.com/api/v1";
 
 export type NFTData = {
   name: string;

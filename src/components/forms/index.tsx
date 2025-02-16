@@ -1,8 +1,5 @@
 "use client";
-import {
-  useWriteContract,
- 
-} from "wagmi";
+import { useWriteContract } from "wagmi";
 import { readContract } from "@wagmi/core";
 import { Button } from "../buttons";
 import {
@@ -41,7 +38,7 @@ export const MintForm = () => {
     },
   });
 
-  const { data: walletClient, } = useWalletClient();
+  const { data: walletClient } = useWalletClient();
   const queryClient = useQueryClient();
 
   const updateDetails = (value: string, key: keyof typeof details) => {
@@ -52,9 +49,8 @@ export const MintForm = () => {
   };
 
   const {
-   
     writeContract,
- 
+
     isPending,
     isSuccess,
   } = useWriteContract();
@@ -107,7 +103,7 @@ export const MintForm = () => {
         address: CONTRACT_ADDRESS,
         abi: nftABI,
         functionName: "mint",
-        args: [BigInt(uniqueId), `${BASE_URL}/nft/gallery/:id`],
+        args: [BigInt(uniqueId), `${BASE_URL}/nft/gallery/${uniqueId}`],
       });
       setId(uniqueId);
 
@@ -154,11 +150,16 @@ export const MintForm = () => {
         </div>
         <div className="flex mt-[15px]">
           <div className="mr-[10px]">
-            <Button text="Share" height="40px" width="w-[170px]" icon={<ShareIcon />} />
+            <Button
+              text="Share"
+              height="40px"
+              width="w-[170px]"
+              icon={<ShareIcon />}
+            />
           </div>
           <div className="ml-[10px]">
             <Button
-             width="w-[170px]"
+              width="w-[170px]"
               onClick={() => setMintSuccess(false)}
               text="Mint Another"
               hasGradient
@@ -217,12 +218,12 @@ export const Header = () => {
       <ConnectButton.Custom>
         {({
           account,
-         
+
           openAccountModal,
-         
+
           openConnectModal,
-         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        }: any) => {
+        }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        any) => {
           return (
             <div>
               <Button

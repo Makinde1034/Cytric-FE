@@ -112,6 +112,7 @@ export const MintForm = () => {
       setId(uniqueId);
 
       // console.log(hash);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       toast("Failed to create NFT!");
     }

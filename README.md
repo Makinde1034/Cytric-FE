@@ -12,11 +12,6 @@
 ## Frontend link
 [https://cytric-frontend-git-main-makinde1034s-projects.vercel.app]
 
-- Display stocks information.
-- Search stock by ticker.
-- Add and remove stock from watchlist.
-- Display stock historical data in a line chart for visualization.
-
 ## Demo video link
 
 [https://www.loom.com/share/ef1fafeb7c2d4205ab474c4f055572b7?sid=3080d8eb-c95b-44ae-91ba-f0987f83e538]

@@ -3,7 +3,7 @@
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { PropsWithChildren } from "react";
 import { WagmiProvider } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, base,sepolia } from "wagmi/chains";
+import { sepolia } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import {  darkTheme } from '@rainbow-me/rainbowkit';
 

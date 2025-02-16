@@ -1,8 +1,7 @@
 "use client";
 import {
   useWriteContract,
-  useReadContract,
-  useWaitForTransactionReceipt,
+ 
 } from "wagmi";
 import { readContract } from "@wagmi/core";
 import { Button } from "../buttons";
@@ -21,7 +20,6 @@ import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { BASE_URL, NFTData, createNft } from "@/api";
 import { useWalletClient } from "wagmi";
-import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
@@ -43,7 +41,7 @@ export const MintForm = () => {
     },
   });
 
-  const { data: walletClient, isError, isLoading } = useWalletClient();
+  const { data: walletClient, } = useWalletClient();
   const queryClient = useQueryClient();
 
   const updateDetails = (value: string, key: keyof typeof details) => {
@@ -54,9 +52,9 @@ export const MintForm = () => {
   };
 
   const {
-    data: hash,
+   
     writeContract,
-    error,
+ 
     isPending,
     isSuccess,
   } = useWriteContract();
@@ -218,12 +216,11 @@ export const Header = () => {
       <ConnectButton.Custom>
         {({
           account,
-          chain,
+         
           openAccountModal,
-          openChainModal,
+         
           openConnectModal,
-          authenticationStatus,
-          mounted,
+         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }: any) => {
           return (
             <div>

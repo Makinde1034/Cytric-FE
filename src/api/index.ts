@@ -13,7 +13,7 @@ export type NFTData = {
 
 export const createJwt = async (walletAddress: string) => {
   try {
-    const response: any = await axios({
+    const response = await axios({
       url: `${BASE_URL}/auth
     `,
       method: "post",
@@ -27,12 +27,12 @@ export const createJwt = async (walletAddress: string) => {
     }
 
     return response.data;
-  } catch (err) {}
+  } catch () {}
 };
 
 export const createNft = async (data: NFTData) => {
   try {
-    const response: any = await axios({
+    const response = await axios({
       url: `${BASE_URL}/nft/create`,
       method: "post",
       data,
@@ -58,5 +58,5 @@ export const getGallery = async () => {
     });
 
     return response.data.data 
-  } catch (err) {}
+  } catch () {}
 };

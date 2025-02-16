@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../buttons";
 
 export const Gallery = () => {
-  const { isLoading, isError, data, error } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["gallery"],
     queryFn: getGallery,
     enabled: !!localStorage.getItem("access_token"),
@@ -19,6 +19,7 @@ export const Gallery = () => {
       {data?.length ? (
         <div className="grid  lg:grid-cols-3 gap-6">
           {data
+           // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ?.map((_: any, i: number, a: NFTData[]) => a[a.length - 1 - i])
             .map((item: NFTData, index: number) => {
               return <Card {...item} key={index} isFirst={index === 0} />;

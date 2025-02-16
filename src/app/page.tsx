@@ -3,7 +3,7 @@
 import { Button } from "@/components/buttons";
 import { MintForm } from "@/components/forms";
 import { CoinsIcon, VideoIcon } from "@/components/icons";
-import Image from "next/image";
+
 import { useWalletClient } from "wagmi";
 import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ import { createJwt } from "@/api";
 import { Gallery } from "@/components/gallery";
 
 export default function Home() {
-  const { data: walletClient, isError, isLoading } = useWalletClient();
+  const { data: walletClient } = useWalletClient();
 
   const mutation = useMutation({
     mutationFn: (walletAddress: string) => {

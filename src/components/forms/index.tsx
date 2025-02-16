@@ -119,7 +119,7 @@ export const MintForm = () => {
     }
   };
 
-  if (1) {
+  if (mintSuccess) {
     return (
       <div className="lg:w-[27%] w-full flex justify-center items-center flex-col  p-[20px] rounded-[16px] bg-gradient-to-r  from-[#0B101A] to-[#151C2B] border-[0.5px] border border-[#10B981]">
         <SuccessIcon />

@@ -27,7 +27,7 @@ export const createJwt = async (walletAddress: string) => {
     }
 
     return response.data;
-  } catch () {}
+  } catch {}
 };
 
 export const createNft = async (data: NFTData) => {
@@ -41,7 +41,7 @@ export const createNft = async (data: NFTData) => {
       },
     });
 
-    return response.data ;
+    return response.data;
   } catch (err) {
     toast("Failed to create NFT!");
   }
@@ -57,6 +57,6 @@ export const getGallery = async () => {
       },
     });
 
-    return response.data.data 
-  } catch () {}
+    return response.data.data;
+  } catch {}
 };

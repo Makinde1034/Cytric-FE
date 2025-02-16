@@ -9,18 +9,20 @@ export const Gallery = () => {
     enabled: !!localStorage.getItem("access_token"),
   });
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <Loader />;
   }
 
   return (
     <div className="w-full ">
       <h3 className="font-bold text-[1.3rem] mb-[30px]">Your NFT Gallery</h3>
-      {data.length ? (
-        <div className="grid  grid-cols-3 gap-6">
-          {data.reverse().map((item: NFTData, index: number) => (
-            <Card {...item} key={index} />
-          ))}
+      {data?.length ? (
+        <div className="grid  lg:grid-cols-3 gap-6">
+          {data
+            ?.map((_: any, i: number, a: NFTData[]) => a[a.length - 1 - i])
+            .map((item: NFTData, index: number) => {
+              return <Card {...item} key={index} isFirst={index === 0} />;
+            })}
         </div>
       ) : (
         <div>
@@ -33,9 +35,18 @@ export const Gallery = () => {
   );
 };
 
-const Card = ({ description, name, logoUrl }: NFTData) => {
+const Card = ({
+  description,
+  name,
+  logoUrl,
+  isFirst,
+}: NFTData & { isFirst?: boolean }) => {
   return (
-    <div className="h-[300px] bg-gradient-to-r rounded-[15px] from-[#0B101A] to-[#151C2B] border-[0.5px] border-[#374151] ">
+    <div
+      className={`h-[300px] bg-gradient-to-r rounded-[15px] from-[#0B101A] to-[#151C2B] border-[1px] ${
+        isFirst ? "border-[#10B981]" : "border-[#374151]"
+      } `}
+    >
       <img
         className="h-[200px] w-full rounded-tr-[15px] rounded-tl-[15px]"
         src={logoUrl}
@@ -49,4 +60,10 @@ const Card = ({ description, name, logoUrl }: NFTData) => {
   );
 };
 
-// border-[#10B981]
+export const NewBadge = () => {
+  return (
+    <div className="h-[80px] w-[40px] bg-[#10B981]">
+      <p>New</p>
+    </div>
+  );
+};

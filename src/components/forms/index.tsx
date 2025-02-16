@@ -6,7 +6,13 @@ import {
 } from "wagmi";
 import { readContract } from "@wagmi/core";
 import { Button } from "../buttons";
-import { LogoIcon, MintIcon, SuccessIcon, WalletIcon } from "../icons";
+import {
+  LogoIcon,
+  MintIcon,
+  ShareIcon,
+  SuccessIcon,
+  WalletIcon,
+} from "../icons";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import nftABI from "../../abi/nft.json";
 import { config } from "../../../config";
@@ -28,6 +34,7 @@ export const MintForm = () => {
   });
 
   const [mintSuccess, setMintSuccess] = useState(false);
+  const [id, setId] = useState(0);
 
   const mutation = useMutation({
     mutationFn: (data: NFTData) => {
@@ -52,11 +59,6 @@ export const MintForm = () => {
     isPending,
     isSuccess,
   } = useWriteContract();
-
-  const { isLoading: isConfirming, isSuccess: isConfirmed } =
-    useWaitForTransactionReceipt({
-      hash,
-    });
 
   // checks if mint is successful to display success modal
   useEffect(() => {
@@ -108,6 +110,7 @@ export const MintForm = () => {
         functionName: "mint",
         args: [BigInt(uniqueId), `${BASE_URL}/nft/gallery/:id`],
       });
+      setId(uniqueId);
 
       // console.log(hash);
     } catch (err) {}
@@ -115,7 +118,7 @@ export const MintForm = () => {
 
   if (mintSuccess) {
     return (
-      <div className="w-[27%] flex justify-center items-center flex-col  p-[20px] rounded-[16px] bg-gradient-to-r  from-[#0B101A] to-[#151C2B] border-[0.5px] border border-[#10B981]">
+      <div className="lg:w-[27%] w-full flex justify-center items-center flex-col  p-[20px] rounded-[16px] bg-gradient-to-r  from-[#0B101A] to-[#151C2B] border-[0.5px] border border-[#10B981]">
         <SuccessIcon />
         <h3 className="text-[#10B981] font-bold text-[1.2rem] mb-[5px]">
           NFT Minted Successfully!
@@ -144,12 +147,12 @@ export const MintForm = () => {
           </div>
           <div className="w-full mt-[10px]">
             <p className="text-xs text-[#9CA3AF] mb-[2px]">NFT ID</p>
-            <p className="text-xs text-[#8B5CF6] mb-[6px]"></p>
+            <p className="text-xs text-[#8B5CF6] mb-[6px]">{id}</p>
           </div>
         </div>
         <div className="flex mt-[10px]">
           <div className="mr-[10px]">
-            <Button text="Share" height="40px" icon={<MintIcon />} />
+            <Button text="Share" height="40px" icon={<ShareIcon />} />
           </div>
           <div className="ml-[10px]">
             <Button
@@ -166,7 +169,7 @@ export const MintForm = () => {
   }
 
   return (
-    <div className="w-[27%]  p-[20px] rounded-[16px]  bg-gradient-to-r  from-[#0B101A] to-[#151C2B] border-[0.5px] border border-[#374151]">
+    <div className="lg:w-[27%] w-full  p-[20px]  rounded-[16px]  bg-gradient-to-r  from-[#0B101A] to-[#151C2B] border-[0.5px] border border-[#374151]">
       <h3 className="font-bold mb-[25px]">Mint Your NFT</h3>
       <div>
         <p className="text-xs text-[#9CA3AF] mb-[6px]">NFT Name</p>
@@ -205,15 +208,9 @@ export const MintForm = () => {
 
 export const Header = () => {
   return (
-    <div className="h-[60px] px-[50px] w-full] bg-[#020305] flex items-center justify-between">
+    <div className="h-[60px] px-[20px] lg:px-[50px] w-full] bg-[#020305] flex items-center justify-between">
       <LogoIcon />
-      {/* <Button
-        icon={<WalletIcon />}
-        text="Connect Wallet"
-        hasGradient
-        height="40px"
-        radius="rounded-[20px]"
-      /> */}
+
       <ConnectButton.Custom>
         {({
           account,

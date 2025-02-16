@@ -27,11 +27,10 @@ export default function Home() {
     }
   }, [walletClient]);
 
-  console.log(walletClient, "kk");
   return (
-    <div className=" items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className=" items-center justify-items-center min-h-screen  py-10 lg:px-[100px]   font-[family-name:var(--font-geist-sans)]">
       <h1 className="text-[2.7rem] mb-[30px] leading-none  font-bold text-center">
-        Discover & collect <br /> Extraordinary NFTs
+        Discover & Collect <br /> Extraordinary NFTs
       </h1>
       <p className="text-[#D1D5DB] text-center">
         Enter the world of digital art and collectibles. Explore unique NFTs
@@ -42,13 +41,13 @@ export default function Home() {
           <Button text="Start creating" icon={<CoinsIcon />} hasGradient />
         </div>
         <div className="ml-[5px]">
-          <Button text="Watch demo" icon={<VideoIcon />} />
+          <Button text="Watch Demo" icon={<VideoIcon />} />
         </div>
       </div>
-      <div className="w-full justify-items-center mt-[100px]">
+      <div className="w-full justify-items-center mt-[80px]">
         <MintForm />
       </div>
-      <div className="w-full">
+      <div className="w-full mt-[50px]">
         <Gallery />
       </div>
     </div>

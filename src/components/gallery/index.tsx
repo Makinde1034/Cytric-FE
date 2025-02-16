@@ -1,3 +1,5 @@
+"use client";
+
 import { NFTData, getGallery } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../buttons";

@@ -12,7 +12,7 @@ export type NFTData = {
 
 export const createJwt = async (walletAddress: string) => {
   try {
-    const response = await axios({
+    const response: any = await axios({
       url: `${BASE_URL}/auth
     `,
       method: "post",
@@ -20,8 +20,11 @@ export const createJwt = async (walletAddress: string) => {
         wallet: walletAddress,
       },
     });
+    console.log(response, "f");
 
-    localStorage.setItem("access_token", response.data.data.accessToken);
+    if (response.data.success) {
+      localStorage.setItem("access_token", response.data.data.accessToken);
+    }
 
     return response.data;
   } catch (err) {}
@@ -29,7 +32,7 @@ export const createJwt = async (walletAddress: string) => {
 
 export const createNft = async (data: NFTData) => {
   try {
-    const response = await axios({
+    const response: any = await axios({
       url: `${BASE_URL}/nft/create`,
       method: "post",
       data,
@@ -38,8 +41,20 @@ export const createNft = async (data: NFTData) => {
       },
     });
 
-    localStorage.setItem("access_token", response.data.data.accessToken);
+    return response.data ;
+  } catch (err) {}
+};
 
-    return response.data;
+export const getGallery = async () => {
+  try {
+    const response = await axios({
+      url: `${BASE_URL}/nft/gallery`,
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    });
+
+    return response.data.data 
   } catch (err) {}
 };

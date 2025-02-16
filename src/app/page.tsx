@@ -8,6 +8,7 @@ import { useWalletClient } from "wagmi";
 import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { createJwt } from "@/api";
+import { Gallery } from "@/components/gallery";
 
 export default function Home() {
   const { data: walletClient, isError, isLoading } = useWalletClient();
@@ -22,7 +23,7 @@ export default function Home() {
     if (walletClient) {
       // create JWT when wallet connets for secure connetction to BE
       const res = mutation.mutate(walletClient.account.address);
-      console.log(res)
+      console.log(res);
     }
   }, [walletClient]);
 
@@ -46,6 +47,9 @@ export default function Home() {
       </div>
       <div className="w-full justify-items-center mt-[100px]">
         <MintForm />
+      </div>
+      <div className="w-full">
+        <Gallery />
       </div>
     </div>
   );

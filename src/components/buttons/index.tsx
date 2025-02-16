@@ -8,6 +8,7 @@ export const Button = ({
   width,
   radius,
   onClick,
+  loading,
 }: {
   text: string;
   hasGradient?: boolean;
@@ -16,6 +17,7 @@ export const Button = ({
   width?: string;
   radius?: string;
   onClick?: () => void;
+  loading?: boolean;
 }) => {
   const gradient = hasGradient
     ? "bg-gradient-to-r  from-[#E64A9F] to-[#915AF0]"
@@ -32,8 +34,24 @@ export const Button = ({
       onClick={onClick}
       className={`${h} ${w} ${gradient} ${r} flex items-center justify-center hover:brightness-[130%]`}
     >
-      {icon}
-      <p className=" text-sm font-bold ml-[6px]">{text}</p>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          {icon}
+          <p className=" text-sm font-bold ml-[6px]">{text}</p>
+        </>
+      )}
     </button>
+  );
+};
+
+export const Loader = () => {
+  return (
+    <div
+      className="animate-spin inline-block size-4 border-[3px] border-current border-t-transparent text-white rounded-full"
+      role="status"
+      aria-label="loading"
+    ></div>
   );
 };

@@ -16,6 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 import { BASE_URL, NFTData, createNft } from "@/api";
 import { useWalletClient } from "wagmi";
 import Image from "next/image";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CONTRACT_ADDRESS = "0x743f49311a82fe72eb474c44e78da2a6e0ae951c";
 
@@ -35,6 +36,7 @@ export const MintForm = () => {
   });
 
   const { data: walletClient, isError, isLoading } = useWalletClient();
+  const queryClient = useQueryClient();
 
   const updateDetails = (value: string, key: keyof typeof details) => {
     setDetails((prev) => ({
@@ -60,6 +62,7 @@ export const MintForm = () => {
   useEffect(() => {
     if (isSuccess) {
       setMintSuccess(true);
+      queryClient.invalidateQueries({ queryKey: ["gallery"] });
     }
   }, [isSuccess]);
 
@@ -112,7 +115,7 @@ export const MintForm = () => {
 
   if (mintSuccess) {
     return (
-      <div className="w-[27%] flex justify-center items-center flex-col  p-[20px] rounded-[16px]  bg-gradient-to-r  from-[#0B101A] to-[#151C2B] border-[0.5px] border border-[#10B981]">
+      <div className="w-[27%] flex justify-center items-center flex-col  p-[20px] rounded-[16px] bg-gradient-to-r  from-[#0B101A] to-[#151C2B] border-[0.5px] border border-[#10B981]">
         <SuccessIcon />
         <h3 className="text-[#10B981] font-bold text-[1.2rem] mb-[5px]">
           NFT Minted Successfully!
@@ -121,10 +124,10 @@ export const MintForm = () => {
           Your NFT has been created and added to your collection
         </p>
         <div className="w-full bg-[#1F2937] rounded-[10px] p-[15px]">
-          <div className="h-[200px] w-full bg-[red]  rounded-[5px]">
+          <div className="h-[200px] w-full  rounded-[5px]">
             <img
               style={{ objectFit: "fill" }}
-              className="h-full w-full"
+              className="h-full w-full  rounded-[5px]"
               src={details.imageUrl}
               alt="nft image"
             />
@@ -142,6 +145,20 @@ export const MintForm = () => {
           <div className="w-full mt-[10px]">
             <p className="text-xs text-[#9CA3AF] mb-[2px]">NFT ID</p>
             <p className="text-xs text-[#8B5CF6] mb-[6px]"></p>
+          </div>
+        </div>
+        <div className="flex mt-[10px]">
+          <div className="mr-[10px]">
+            <Button text="Share" height="40px" icon={<MintIcon />} />
+          </div>
+          <div className="ml-[10px]">
+            <Button
+              onClick={() => setMintSuccess(false)}
+              text="Mint Another"
+              hasGradient
+              height="40px"
+              icon={<MintIcon />}
+            />
           </div>
         </div>
       </div>
@@ -179,6 +196,7 @@ export const MintForm = () => {
           width="w-full"
           icon={<MintIcon />}
           onClick={mint}
+          loading={isPending}
         />
       </div>
     </div>
@@ -196,7 +214,7 @@ export const Header = () => {
         height="40px"
         radius="rounded-[20px]"
       /> */}
-      {/* <ConnectButton.Custom>
+      <ConnectButton.Custom>
         {({
           account,
           chain,
@@ -208,25 +226,20 @@ export const Header = () => {
         }: any) => {
           return (
             <div>
-              {(() => {
-                return (
-                  <Button
-                    onClick={
-                      account?.displayName ? openAccountModal : openConnectModal
-                    }
-                    icon={<WalletIcon />}
-                    text={account?.displayName || "Connect Wallet"}
-                    hasGradient
-                    height="40px"
-                    radius="rounded-[20px]"
-                  />
-                );
-              })()}
+              <Button
+                onClick={
+                  account?.displayName ? openAccountModal : openConnectModal
+                }
+                icon={<WalletIcon />}
+                text={account?.displayName || "Connect Wallet"}
+                hasGradient
+                height="40px"
+                radius="rounded-[20px]"
+              />
             </div>
           );
         }}
-      </ConnectButton.Custom> */}
-      <ConnectButton />
+      </ConnectButton.Custom>
     </div>
   );
 };

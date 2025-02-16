@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/forms";
 import { RainbowProvider } from "@/providers/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
+import { ToastContainer } from 'react-toastify';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
       >
         <RainbowProvider>
           <Header />
+          <ToastContainer />
           {children}
         </RainbowProvider>
       </body>

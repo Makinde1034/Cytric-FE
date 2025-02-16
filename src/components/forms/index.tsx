@@ -23,6 +23,7 @@ import { BASE_URL, NFTData, createNft } from "@/api";
 import { useWalletClient } from "wagmi";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const CONTRACT_ADDRESS = "0x743f49311a82fe72eb474c44e78da2a6e0ae951c";
 
@@ -113,10 +114,12 @@ export const MintForm = () => {
       setId(uniqueId);
 
       // console.log(hash);
-    } catch (err) {}
+    } catch (err) {
+      toast("Failed to create NFT!");
+    }
   };
 
-  if (mintSuccess) {
+  if (1) {
     return (
       <div className="lg:w-[27%] w-full flex justify-center items-center flex-col  p-[20px] rounded-[16px] bg-gradient-to-r  from-[#0B101A] to-[#151C2B] border-[0.5px] border border-[#10B981]">
         <SuccessIcon />
@@ -150,12 +153,13 @@ export const MintForm = () => {
             <p className="text-xs text-[#8B5CF6] mb-[6px]">{id}</p>
           </div>
         </div>
-        <div className="flex mt-[10px]">
+        <div className="flex mt-[15px]">
           <div className="mr-[10px]">
-            <Button text="Share" height="40px" icon={<ShareIcon />} />
+            <Button text="Share" height="40px" width="w-[170px]" icon={<ShareIcon />} />
           </div>
           <div className="ml-[10px]">
             <Button
+             width="w-[170px]"
               onClick={() => setMintSuccess(false)}
               text="Mint Another"
               hasGradient

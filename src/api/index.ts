@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const BASE_URL = "http://172.20.10.9:4191/api/v1";
 
@@ -20,7 +21,6 @@ export const createJwt = async (walletAddress: string) => {
         wallet: walletAddress,
       },
     });
-    console.log(response, "f");
 
     if (response.data.success) {
       localStorage.setItem("access_token", response.data.data.accessToken);
@@ -42,7 +42,9 @@ export const createNft = async (data: NFTData) => {
     });
 
     return response.data ;
-  } catch (err) {}
+  } catch (err) {
+    toast("Failed to create NFT!");
+  }
 };
 
 export const getGallery = async () => {

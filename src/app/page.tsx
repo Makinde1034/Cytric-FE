@@ -22,8 +22,7 @@ export default function Home() {
   useEffect(() => {
     if (walletClient) {
       // create JWT when wallet connets for secure connetction to BE
-      const res = mutation.mutate(walletClient.account.address);
-      console.log(res);
+      mutation.mutate(walletClient.account.address);
     }
   }, [walletClient]);
 

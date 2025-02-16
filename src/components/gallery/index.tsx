@@ -3,15 +3,13 @@
 import { NFTData, getGallery } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../buttons";
+import { getStorageValue } from "@/helpers";
 
 export const Gallery = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["gallery"],
     queryFn: getGallery,
-    enabled:
-      typeof window !== "undefined"
-        ? !!localStorage.getItem("access_token")
-        : false,
+    enabled: !!getStorageValue("access_token"),
   });
 
   if (isLoading) {

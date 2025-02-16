@@ -1,3 +1,4 @@
+import { setStorageValue, getStorageValue } from "@/helpers";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -23,7 +24,7 @@ export const createJwt = async (walletAddress: string) => {
     });
 
     if (response.data.success) {
-      localStorage.setItem("access_token", response.data.data.accessToken);
+      setStorageValue("access_token", response.data.data.accessToken);
     }
 
     return response.data;
@@ -39,13 +40,13 @@ export const createNft = async (data: NFTData) => {
       method: "post",
       data,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        Authorization: `Bearer ${getStorageValue("access_token")}`,
       },
     });
 
     return response.data;
   } catch (err) {
-    console.log(err)
+    console.log(err);
     toast("Failed to create NFT!");
   }
 };
@@ -56,7 +57,7 @@ export const getGallery = async () => {
       url: `${BASE_URL}/nft/gallery`,
       method: "get",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        Authorization: `Bearer ${getStorageValue("access_token")}`,
       },
     });
 
